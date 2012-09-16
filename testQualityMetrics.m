@@ -24,7 +24,7 @@ results.bounded_mse=mean(sqerror2(:));
 results.bounded_relative_error=norm(inputImage-boundedOutputImage)/norm(inputImage); 
 
 
-if isfield(results.settings,'fovea')
+if  isfield(results,'settings') && isfield(results.settings,'fovea')
 %     fovea2=results.settings.fovea./size(inputImage); % fovea position relative to image frame
 %     results.fvssim=fsbssim_index(inputImage,outputImage,fovea2); 
     results.fssim=fssim(inputImage,outputImage,struct('fovea',results.settings.fovea,'viewDist',3));
@@ -38,3 +38,5 @@ if isfield(results.settings,'fovea')
     %results.fvmse3 % mse (reference , output ) weighted by cutoff
     %frequency
 end
+
+results.brisque=brisque.brisquescore(outputImage);
