@@ -56,13 +56,13 @@ if 0
 
     load(fullfile(bfolder,'output'))
 else
-    % use clone git://github.com/gregfreeman/libsvm.git branch -b new_matlab_interface
+    % use `git clone git://github.com/gregfreeman/libsvm.git -b new_matlab_interface`
     [range,lu]=libsvmreadrange(fullfile(bfolder,'allrange'));
     sfeat=libsvmscale(feat,range,lu);
     allmodel=libsvmreadmodel(fullfile(bfolder,'allmodel'),36);
-    [output, p ] = svmpredict(sfeat, allmodel);
+    [output,desc] = svmpredict(sfeat, allmodel);
 %     disp(output)
-%     disp(p)
+%     disp(desc)
 end
 
 qualityscore = output;

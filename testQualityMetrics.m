@@ -40,3 +40,6 @@ if  isfield(results,'settings') && isfield(results.settings,'fovea')
 end
 
 results.brisque=brisque.brisquescore(outputImage);
+results.bliinds2=bliinds2.bliinds2_score(outputImage);
+results.divine=divine.divine(outputImage);
+
