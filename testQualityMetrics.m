@@ -1,4 +1,32 @@
 function results=testQualityMetrics(results,inputImage,outputImage)
+% results=testQualityMetrics(results,inputImage,outputImage)
+%
+% results is a struct
+% the output results struct will contain fields for different metrics of
+% image quality
+%
+% inputImage - reference image
+% outputImage - degraded image
+%
+% full reference:
+% ms_ssim
+% ssim
+% mse
+% relative_error
+%
+% no reference (blind):
+% brisque
+% bliinds2
+% divine
+%
+% if results contains a 'settings' field with a struct containing a 'fovea'
+% field, foveation based quality metrics will also be computed
+% fssim
+% fvmse + variants
+%
+%
+%
+%
 
 %bound image pixels 0-255
 boundedOutputImage=min(outputImage,255.*ones(size(outputImage)));
