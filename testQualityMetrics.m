@@ -67,7 +67,25 @@ if  isfield(results,'settings') && isfield(results.settings,'fovea')
     %frequency
 end
 
-results.brisque=brisque.brisquescore(outputImage);
-results.bliinds2=bliinds2.bliinds2_score(outputImage);
-results.divine=divine.divine(outputImage);
+try
+    results.brisque=brisque.brisquescore(outputImage);
+catch exception
+    results.brisque=nan;
+    disp '*********** Error: '
+    disp (getReport(exception,'extended'))
+end
+try
+    results.bliinds2=bliinds2.bliinds2_score(outputImage);
+catch exception
+    results.bliinds2=nan;
+    disp '*********** Error: '
+    disp (getReport(exception,'extended'))
+end
+try
+    results.divine=divine.divine(outputImage);
+catch exception
+    results.divine=nan;
+    disp '*********** Error: '
+    disp (getReport(exception,'extended'))
+end
 
