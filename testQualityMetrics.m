@@ -67,6 +67,28 @@ if  isfield(results,'settings') && isfield(results.settings,'fovea')
     %frequency
 end
 
+% add dmos mappings for mse,ssim,ms_ssim so that they are on same scale
+% as blind indices
+try    
+    fullpath = mfilename('fullpath');
+    idx      = find(fullpath == filesep);
+    thisfolder = fullpath(1:(idx(end)-1));
+    dmos_fit=load(fullfile(thisfolder,'dmos_fit_fns'));
+    % uses LIVE database with logistic regression
+    results.mse_dmos=dmos_fit.fns.mse(results.mse); 
+    % uses LIVE database with constrained polynomial regression
+    results.ssim_dmos=dmos_fit.fns.ssim(results.ssim); % 
+    % uses LIVE database with logistic regression
+    results.ms_ssim_dmos=dmos_fit.fns.ms_ssim(results.ms_ssim);
+catch exception
+    results.mse_dmos=nan;
+    results.ssim_dmos=nan;
+    results.ms_ssim_dmos=nan;
+    disp '*********** Error: '
+    disp (getReport(exception,'extended'))
+end
+    
+%brisque blind index
 try
     results.brisque=brisque.brisquescore(outputImage);
 catch exception
@@ -74,6 +96,7 @@ catch exception
     disp '*********** Error: '
     disp (getReport(exception,'extended'))
 end
+%bliinds2 blind index
 try
     results.bliinds2=bliinds2.bliinds2_score(outputImage);
 catch exception
@@ -81,6 +104,7 @@ catch exception
     disp '*********** Error: '
     disp (getReport(exception,'extended'))
 end
+%divine blind index
 try
     results.divine=divine.divine(outputImage);
 catch exception
