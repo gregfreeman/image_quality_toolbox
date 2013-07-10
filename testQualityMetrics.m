@@ -14,14 +14,14 @@ else
     results.ms_ssim=msssim(inputImage,outputImage);
     results.bounded_ms_ssim=msssim(inputImage,boundedOutputImage);
 end
-results.relative_error=norm(inputImage-outputImage)/norm(inputImage); 
+results.relative_error=norm(inputImage(:)-outputImage(:))/norm(inputImage(:)); 
 sqerror2=(inputImage-outputImage).^2;
 results.mse=mean(sqerror2(:));
 
 results.bounded_ssim=ssim_index_m(inputImage,boundedOutputImage); 
 sqerror2=(inputImage-boundedOutputImage).^2;
 results.bounded_mse=mean(sqerror2(:));
-results.bounded_relative_error=norm(inputImage-boundedOutputImage)/norm(inputImage); 
+results.bounded_relative_error=norm(inputImage(:)-boundedOutputImage(:))/norm(inputImage(:)); 
 
 
 if isfield(results.settings,'fovea')
